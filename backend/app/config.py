@@ -16,12 +16,17 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 24 hours
 
-    # CORS – localhost + deployed URLs (add your Vercel URL after first deploy)
+    # CORS – explicit origins. Add your exact Vercel/Railway URLs here.
     ALLOWED_ORIGINS: List[str] = [
         "http://localhost:3000",
         "http://localhost:3001",
-        "https://*.vercel.app",
-        "https://*.railway.app",
+        "https://frontend-liard-zeta-46.vercel.app",
+    ]
+
+    # Suffix patterns for dynamic origin matching (e.g. preview deployments)
+    ALLOWED_ORIGIN_SUFFIXES: List[str] = [
+        ".vercel.app",
+        ".railway.app",
     ]
 
     # Database

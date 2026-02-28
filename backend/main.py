@@ -33,9 +33,19 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+def is_allowed_origin(origin: str) -> bool:
+    if origin in settings.ALLOWED_ORIGINS:
+        return True
+    for suffix in settings.ALLOWED_ORIGIN_SUFFIXES:
+        if origin.endswith(suffix):
+            return True
+    return False
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origin_regex=r"https://.*\.(vercel|railway)\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
