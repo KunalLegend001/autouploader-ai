@@ -29,8 +29,18 @@ class Settings(BaseSettings):
         ".railway.app",
     ]
 
-    # Database
+    # Database – Railway provides postgresql://, we need postgresql+asyncpg://
     DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/autouploader"
+
+    @property
+    def async_database_url(self) -> str:
+        """Always returns URL with the asyncpg driver scheme."""
+        url = self.DATABASE_URL
+        if url.startswith("postgresql://"):
+            url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        elif url.startswith("postgres://"):
+            url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+        return url
 
     # Redis / Celery
     REDIS_URL: str = "redis://localhost:6379/0"
