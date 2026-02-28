@@ -22,5 +22,5 @@ RUN mkdir -p /tmp/autouploader/clips
 
 EXPOSE 8000
 
-# Railway sets $PORT; fall back to 8000 locally
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Shell form: /bin/sh expands $PORT at runtime (Railway injects it)
+CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1
