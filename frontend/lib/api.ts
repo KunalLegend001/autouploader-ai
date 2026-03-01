@@ -1,9 +1,7 @@
 import axios from 'axios'
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ||
-  (process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8000/api/v1'
-    : 'https://au-backend-api-kunal.up.railway.app/api/v1')
+// Hardcoding to bypass any cached Vercel env vars
+const API_BASE = 'https://au-backend-api-kunal.up.railway.app/api/v1'
 
 const api = axios.create({
   baseURL: API_BASE,
