@@ -18,7 +18,8 @@ export default function LoginPage() {
         try {
             await login(email, password)
         } catch (err: any) {
-            setError(err.response?.data?.detail || 'Login failed. Please try again.')
+            console.error('Login error:', err)
+            setError(err.response?.data?.detail || err.message || 'Login failed. Please try again.')
         } finally {
             setLoading(false)
         }

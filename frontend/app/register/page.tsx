@@ -19,7 +19,8 @@ export default function RegisterPage() {
         try {
             await register(email, username, password)
         } catch (err: any) {
-            setError(err.response?.data?.detail || 'Registration failed. Please try again.')
+            console.error('Registration error:', err)
+            setError(err.response?.data?.detail || err.message || 'Registration failed. Please try again.')
         } finally {
             setLoading(false)
         }
