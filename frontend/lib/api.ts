@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// Hardcoding to bypass any cached Vercel env vars
-const API_BASE = 'https://au-backend-api-kunal.up.railway.app/api/v1'
+// Using Next.js rewrites to proxy Railway and bypass DNS blocking!
+const API_BASE = '/api/v1'
 
 const api = axios.create({
   baseURL: API_BASE,
